@@ -2,10 +2,17 @@
 const routes = [
   {
     path: '/',
-    //component: () => import(),
-    children: [
-      { path: '', component: () => import('src/pages/home.page.vue') }
-    ]
+    component: () => import('src/pages/home.page.vue'),
+  },
+  {
+    path: '/bag',
+    component: () => import('src/pages/bag.page.vue'),
+
+  },
+  {
+    path: '/payment',
+    component: () => import('src/pages/payment.page.vue'),
+
   },
 
   // Always leave this as last one,

@@ -1,12 +1,17 @@
 <template>
   <div class="navbar">
     <div class="container items">
-      <a href="#">
-        <div class="logo">
+
+
+      <div class="logo">
+        <a href="#">
           <div>GOOD</div>
           <div>GOOD</div>
-        </div>
-      </a>
+        </a>
+      </div>
+
+
+
 
       <div class="search">
         <input class="search--input" type="text" placeholder="Busque aqui">
@@ -32,7 +37,6 @@
 <script>
 import { defineComponent, ref } from 'vue'
 
-
 export default defineComponent({
   name: 'HeaderPage',
   props: {
@@ -42,7 +46,7 @@ export default defineComponent({
   },
 
   components: {
-
+   
   },
 
   setup() {

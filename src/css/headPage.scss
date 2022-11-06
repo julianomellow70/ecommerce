@@ -9,10 +9,6 @@
     padding-bottom: 10px;
   }
 
-  a {
-    text-decoration: none;
-  }
-
   .search {
     width: 100%;
   }
@@ -24,14 +20,23 @@
     padding: 10px 15px;
   }
   .logo {
-    width: 10%;
-    color: $secondary;
-    font-weight: bold;
-    font-size: 16px;
+    div {
+      width: 100%;
+      color: $secondary;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    a {
+      text-decoration: none;
+    }
   }
   .bag {
     width: 10%;
+    a {
+      text-decoration: none;
+    }
   }
+
   .bag--contador {
     background-color: $contrast;
     border-radius: 50%;
@@ -51,20 +56,22 @@
       flex-direction: column;
     }
     .search {
-      width: 100%;
+      order: 3;
+      width: 100vw;
       margin-bottom: 10px;
     }
     .search--input {
-      width: 90%;
+      width: 80vw;
+
     }
     .logo {
       margin-left: 1em;
       margin-bottom: 10px;
+      width: auto;
     }
-    .bag {
-      width: 100%;
-      text-align: start;
+    .bag{
       margin-left: 1em;
+      width: auto;
     }
   }
 }

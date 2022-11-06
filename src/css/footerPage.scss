@@ -1,0 +1,21 @@
+
+.footer{
+  background-color: $primary;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  .logo {
+    padding: 10px;
+    div {
+      width: 100%;
+      color: $secondary;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    a {
+      text-decoration: none;
+    }
+  }
+}
