@@ -1,10 +1,14 @@
 <template>
-  <HeaderPage contador="4"/>
-  <div class="container">
-    <ProductsItems></ProductsItems>
+  <ContextItems>
+    <HeaderPage>
+    </HeaderPage>
+    <div class="container">
+      <ProductsItems></ProductsItems>
+    </div>
+    <FooterPage />
+  </ContextItems>
 
-  </div>
-  <FooterPage/>
+
 </template>
 
 <script>
@@ -12,12 +16,16 @@ import { defineComponent } from 'vue'
 import HeaderPage from '../layouts/header.layouts.vue'
 import ProductsItems from '../layouts/productsItems.layouts.vue'
 import FooterPage from '../layouts/footer.layouts.vue'
+import ContextItems from '../components/context.component.vue'
+
+
 export default defineComponent({
   name: 'HomePage',
   components: {
     HeaderPage,
     ProductsItems,
-    FooterPage
+    FooterPage,
+    ContextItems
   }
 })
 </script>

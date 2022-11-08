@@ -24,7 +24,7 @@
             </span>
           </div>
           <div class="bag--contador">
-            {{ contador }}
+            {{ numItems }}
           </div>
         </a>
 
@@ -35,26 +35,23 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'HeaderPage',
-  props: {
-    contador: {
-      type: String
-    }
-  },
-
-  components: {
-   
-  },
-
-  setup() {
-
+  inject: ['contador'],
+  data(){
     return {
-
-
+      numItems : this.contador
     }
-  }
+  },
+  methods: {
+
+  },
+  components: {
+
+  },
+
+  
 })
 </script>

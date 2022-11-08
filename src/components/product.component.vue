@@ -1,20 +1,61 @@
 <template>
   <div class="products-items--item">
-         <img class="products-items-item--image" src="../../public/images/hd-externo.jpg" alt="">
-         <div class="products-items-item--price">
-           R$ 750,58
-         </div>
-         <div class="products-items-item--name">
-           Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5
-         </div>
-         <button class="products-items-item--btn">Adicionar ao carrinho</button>
-       </div>
- </template>
+    <img :src="src" class="products-items-item--image" alt="">
+    <div class="products-items-item--price">
+      ${{ price }}
+    </div>
+    <div class="products-items-item--name">
+      {{ title }}
+    </div>
 
- <script>
- import { defineComponent } from 'vue'
+    <button v-on:click="addBag(id, title, src, price)" class="products-items-item--btn">Adicionar ao carrinho</button>
+  </div>
+</template>
 
- export default defineComponent({
-   name: 'ProductItem',
- })
- </script>
+<script>
+
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ProductItem',
+  props: {
+    title: String,
+    price: String,
+    src: String,
+    id: Int16Array
+  },
+  methods: {
+    addBag(id, title, image, price) {
+      let newItem = {
+        "id": id,
+        "title": title,
+        "image": image,
+        "price": price,
+      }
+      let bagItems = localStorage.getItem('bag');
+      bagItems = JSON.parse(bagItems);
+      bagItems = bagItems ? bagItems : { data: [] };
+      let dataBagItems = bagItems.data;
+      dataBagItems.unshift(newItem);
+
+      let newBagItems = {
+        data: dataBagItems
+      }
+
+      localStorage.setItem('bag', JSON.stringify(newBagItems));
+
+      this.addContadorItems();
+
+    }
+  },
+  inject:['contador','addContadorItems'],
+  created() {
+
+  }
+})
+
+
+
+</script>
+
+

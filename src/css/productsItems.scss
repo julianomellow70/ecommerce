@@ -20,6 +20,7 @@
 
 .products-items-item--image{
  width: 150px;
+ height: 150px;
 }
 
 .products-items-item--price{
@@ -31,7 +32,8 @@
  .products-items-item--name{
   color: $contrast;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 12px;
+  height: 40px;
  }
 
 .products-items-item--btn{
