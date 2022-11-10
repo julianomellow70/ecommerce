@@ -24,7 +24,7 @@
             </span>
           </div>
           <div class="bag--contador">
-            {{ numItems }}
+            {{ numberBagItems }}
           </div>
         </a>
 
@@ -36,13 +36,13 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { computed } from 'vue';
+import { useBagStore } from 'src/stores/bag'
 
 export default defineComponent({
   name: 'HeaderPage',
-  inject: ['contador'],
   data(){
     return {
-      numItems : this.contador
     }
   },
   methods: {
@@ -51,7 +51,22 @@ export default defineComponent({
   components: {
 
   },
+  setup() {
+    const store = useBagStore();
 
-  
+    // Option 2: use computed and functions to use the store
+    const numberBagItems = computed(() => store.numberBagItems);
+    const bagItems = computed(() => store.bagItems);
+    const addItemsBag = () => store.addItemsBag(); // use action
+    const removeItemsBag = () => store.removeItemsBag();
+
+    return {
+      numberBagItems,
+      bagItems,
+      addItemsBag,
+      removeItemsBag
+    }
+  }
+
 })
 </script>

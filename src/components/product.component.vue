@@ -7,14 +7,20 @@
     <div class="products-items-item--name">
       {{ title }}
     </div>
+    <div class="products-items--groupbtn">
+      <button v-on:click="addItemsBag(id, title, src, price)" class="products-items-item--btn1">+</button>
+      <div class="products-items-groupbtn--count">{{ numberBagItems }}</div>
+      <button v-on:click="removeItemsBag(id)" class="products-items-item--btn2">-</button>
+    </div>
 
-    <button v-on:click="addBag(id, title, src, price)" class="products-items-item--btn">Adicionar ao carrinho</button>
   </div>
 </template>
 
 <script>
 
 import { defineComponent } from 'vue'
+import { computed } from 'vue';
+import { useBagStore } from 'src/stores/bag'
 
 export default defineComponent({
   name: 'ProductItem',
@@ -24,31 +30,32 @@ export default defineComponent({
     src: String,
     id: Int16Array
   },
-  methods: {
-    addBag(id, title, image, price) {
-      let newItem = {
-        "id": id,
-        "title": title,
-        "image": image,
-        "price": price,
-      }
-      let bagItems = localStorage.getItem('bag');
-      bagItems = JSON.parse(bagItems);
-      bagItems = bagItems ? bagItems : { data: [] };
-      let dataBagItems = bagItems.data;
-      dataBagItems.unshift(newItem);
+  computed: {
+    isDisabled() {
+      return false;
+    }
 
-      let newBagItems = {
-        data: dataBagItems
-      }
+  },
+  setup() {
+    const store = useBagStore();
 
-      localStorage.setItem('bag', JSON.stringify(newBagItems));
+    // Option 2: use computed and functions to use the store
+    const numberBagItems = computed(() => store.numberBagItems);
+    const bagItems = computed(() => store.bagItems);
+    const addItemsBag = (id, title, image, price) => store.addItemsBag(id, title, image, price); // use action
+    const removeItemsBag = (id) => store.removeItemsBag(id);
 
-      this.addContadorItems();
-
+    return {
+      numberBagItems,
+      bagItems,
+      addItemsBag,
+      removeItemsBag
     }
   },
-  inject:['contador','addContadorItems'],
+  methods: {
+
+  },
+  inject: ['contador', 'addContadorItems'],
   created() {
 
   }

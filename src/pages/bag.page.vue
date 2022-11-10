@@ -7,56 +7,20 @@
       <div class="bagitems--columnName">Valor</div>
     </div>
     <div class="bagitems">
-      <div class="bagitems--item">
+      <div class="bagitems--item" v-for="item in bagItems.data" :key="item.id">
         <div>
-          <img class="bagitems-item--image" src="../../public/images/hd-externo.jpg" alt="">
-          <div class="bagitems-item--title">Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5
+          <img class="bagitems-item--image" :src="item.image" alt="">
+          <div class="bagitems-item--title">{{ item.title }}
           </div>
-          <button class="bagitems-item--btn">Remover</button>
+          <button class="bagitems-item--btn" @click="removeItemsBag(item.id)">Remover</button>
         </div>
         <div class="bagitems-item--price">
-          R$ 750,00
-        </div>
-      </div>
-      <div class="bagitems--item">
-        <div>
-          <img class="bagitems-item--image" src="../../public/images/hd-externo.jpg" alt="">
-          <div class="bagitems-item--title">Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5
-          </div>
-          <button class="bagitems-item--btn">Remover</button>
-
-        </div>
-        <div class="bagitems-item--price">
-          R$ 750,00
-        </div>
-      </div>
-      <div class="bagitems--item">
-        <div>
-          <img class="bagitems-item--image" src="../../public/images/hd-externo.jpg" alt="">
-          <div class="bagitems-item--title">Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5
-          </div>
-          <button class="bagitems-item--btn">Remover</button>
-
-        </div>
-        <div class="bagitems-item--price">
-          R$ 750,00
-        </div>
-      </div>
-      <div class="bagitems--item">
-        <div>
-          <img class="bagitems-item--image" src="../../public/images/hd-externo.jpg" alt="">
-          <div class="bagitems-item--title">Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5
-          </div>
-          <button class="bagitems-item--btn">Remover</button>
-
-        </div>
-        <div class="bagitems-item--price">
-          R$ 750,00
+          ${{ item.price }}
         </div>
       </div>
     </div>
     <div class="boxTotal">
-      <div>Valor total <b>R$ 1450,00</b></div>
+      <div>Valor total <b>$ {{ totalPrice }}</b></div>
     </div>
     <div class="bagbtn">
       <a href="/payment"> <button class="bagbtn--finalizarcompra">Finalizar compra</button></a>
@@ -71,11 +35,34 @@
 import { defineComponent } from 'vue'
 import HeaderPage from '../layouts/header.layouts.vue'
 import FooterPage from '../layouts/footer.layouts.vue'
+import { computed } from 'vue';
+import { useBagStore } from 'src/stores/bag'
+
 export default defineComponent({
   name: 'HomePage',
   components: {
     HeaderPage,
     FooterPage
+  },
+  setup() {
+    const store = useBagStore();
+
+    // Option 2: use computed and functions to use the store
+    const numberBagItems = computed(() => store.numberBagItems);
+    const bagItems = computed(() => store.bagItems);
+    const totalPrice = computed(() => store.totalPrice);
+    const addItemsBag = () => store.addItemsBag(); // use action
+    const removeItemsBag = (id) => store.removeItemsBag(id);
+    const clearStates = () => store.clearStates();
+
+    return {
+      numberBagItems,
+      bagItems,
+      totalPrice,
+      clearStates,
+      addItemsBag,
+      removeItemsBag
+    }
   }
 })
 </script>

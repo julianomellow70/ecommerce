@@ -14,6 +14,11 @@ const routes = [
     component: () => import('src/pages/payment.page.vue'),
 
   },
+  {
+    path: '/payment/success',
+    component: () => import('src/pages/payment-success.page.vue'),
+
+  },
 
   // Always leave this as last one,
   // but you can also remove it
