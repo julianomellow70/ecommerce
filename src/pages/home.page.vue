@@ -3,6 +3,7 @@
     <HeaderPage>
     </HeaderPage>
     <div class="container">
+      
       <ProductsItems></ProductsItems>
     </div>
     <FooterPage />
